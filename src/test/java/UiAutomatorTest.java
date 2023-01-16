@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UiAutomatorTest {
     private AndroidDriver driver;
+    private String textToSet = "Netology";
 
     @BeforeEach
     public void setUp() throws MalformedURLException {
@@ -34,20 +35,20 @@ public class UiAutomatorTest {
 
     @Test
     public void firstTest() {
-        MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
-        el2.isDisplayed();
-        String expected = el2.getText();
-        MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
-        el1.click();
+        MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
+        el1.isDisplayed();
+        String currentValue = el1.getText();
+        MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
+        el2.click();
+        MobileElement el3 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
 
-        Assertions.assertEquals(expected, el2.getText());
+        Assertions.assertEquals(currentValue, el3.getText());
     }
 
     @Test
     public void secondTest() {
-
         MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
-        el1.sendKeys("12345");
+        el1.sendKeys(textToSet);
         MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonActivity");
         el2.click();
 
@@ -56,8 +57,7 @@ public class UiAutomatorTest {
 
         MobileElement el3 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/text");
 
-
-        Assertions.assertEquals("12345", el3.getText());
+        Assertions.assertEquals(textToSet, el3.getText());
     }
 
     @AfterEach
